@@ -1,0 +1,35 @@
+<script type="text/javascript">
+  RED.nodes.registerType('twiml-begin',{
+    category: 'TwilioIVR-function',
+    color: '#a6bbcf',
+    defaults: {
+      name: {value:""}
+    },
+    inputs:1,
+    outputs:1,
+    icon: 'parser-html.png',
+    paletteLabel: 'twiml-begin',
+    label: function() {
+      return this.name||"twiml-begin";
+    },
+    oneditprepare: function() {
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="twiml-begin">
+  <div class="form-row">
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="twiml-begin">
+  <p>Begin the TwiML response.</p>
+
+  <h3>References</h3>
+    <ul>
+        <li><a href="https://www.twilio.com/docs/voice/twiml">Twilio TwiML documentation</a></li>
+    </ul>
+
+</script>

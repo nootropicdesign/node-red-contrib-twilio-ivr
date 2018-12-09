@@ -1,0 +1,76 @@
+<script type="text/javascript">
+  
+  RED.nodes.registerType('audio-baseurl',{
+    category: 'config',
+    defaults: {
+      name: {value:""},
+      url: {value:"",required:true},
+    },
+    label: function() {
+      return this.name||this.url;
+    }
+  });
+
+  RED.nodes.registerType('play',{
+    category: 'TwilioIVR-function',
+    color: '#FFCC66',
+    defaults: {
+      baseurl: {
+        type:"audio-baseurl", validate:function(v) {
+          //return (v && v != "_ADD_"); // TODO: remove this to allow full url in payload?
+          return true;
+        }
+      },
+      name: {value:''},
+      url: {value:''}
+    },
+    inputs:1,
+    outputs:1,
+    icon: 'bridge.png',
+    align: 'right',
+    paletteLabel: "play",
+    label: function() {
+      return this.name||"play";
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="audio-baseurl">
+    <div class="form-row">
+        <label for="node-config-input-url"><i class="icon-globe"></i> Base URL</label>
+        <input type="text" id="node-config-input-url">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-config-input-name" placeholder="Name">
+    </div>
+</script>
+
+
+<script type="text/x-red" data-template-name="play">
+  <div class="form-row" id="node-input-baseurl-row">
+    <label for="node-input-baseurl"><i class="icon-globe"></i> Base URL</label>
+    <input type="text" id="node-input-baseurl">
+  </div>
+  <div class="form-row">
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+    <label for="node-input-url"><i class="icon-globe"></i> URL</label>
+    <input type="text" id="node-input-url" placeholder="">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="play">
+  <p>Play an audio file.</p>
+  
+  <p>The audio file is specified by <strong>URL</strong> which is relative to the <strong>Base URL</strong>. <strong>Base URL</strong> is used to specify a web location where your audio files are deployed. If <strong>URL</strong> is not specified, the entire audio file URL can be specified in the input <code>msg.payload.play</code>.</p>
+
+  <h3>References</h3>
+    <ul>
+        <li><a href="https://www.twilio.com/docs/voice/twiml/play">Twilio &lt;Play&gt; documentation</a></li>
+    </ul>
+
+
+</script>

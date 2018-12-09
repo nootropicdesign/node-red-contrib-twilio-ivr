@@ -1,0 +1,68 @@
+<script type="text/javascript">
+  RED.nodes.registerType('record',{
+    category: 'TwilioIVR-function',
+    color: '#F3B567',
+    defaults: {
+      name: {value:""},
+      action: {value:"/router"},
+      maxLength: {value:"5"},
+      timeout: {value:"5"},
+      beep: {value:true},
+      recordingStatusCallback: {value:"/recording-callback"},
+      finishOnKey: {value:"#"}
+    },
+    inputs:1,
+    outputs:1,
+    icon: 'comment.png',
+    align: 'left',
+    paletteLabel: 'record',
+    label: function() {
+      return this.name||"record";
+    },
+  });
+</script>
+
+<script type="text/x-red" data-template-name="record">
+  <div class="form-row">
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+    <label for="node-input-action"><i class="icon-tag"></i> Action</label>
+    <input type="text" id="node-input-action" placeholder="Action">
+  </div>
+  <div class="form-row">
+    <label for="node-input-maxLength"><i class="icon-tag"></i> Max length</label>
+    <input type="text" id="node-input-maxLength" placeholder="5">
+  </div>
+  <div class="form-row">
+    <label for="node-input-timeout"><i class="icon-tag"></i> Timeout</label>
+    <input type="text" id="node-input-timeout" placeholder="5">
+  </div>
+  <div class="form-row">
+    <input type="checkbox" id="node-input-beep" style="display: inline-block; width: auto; vertical-align: top;">
+    <label for="node-input-beep" style="width: auto">Prompt with beep</label>
+  </div>
+  <div class="form-row">
+    <label for="node-input-finishOnKey"><i class="icon-tag"></i> Finish on key</label>
+    <input type="text" id="node-input-finishOnKey" placeholder="#">
+  </div>
+  <div class="form-row">
+    <label for="node-input-recordingStatusCallback"><i class="icon-tag"></i> Recording status callback</label>
+    <input type="text" id="node-input-recordingStatusCallback" placeholder="">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="record">
+  <p>Record caller.</p>
+
+  <p>The default <strong>action</strong> is to invoke the universal router at /router.</p>
+  <p>Information about the recording will be POSTed to the action URL. For example, the URL of the recording will be in the paramter <strong>RecordingURL</strong>. See the TwiML documentation for details.
+  <p>You may optionally specify a <strong>recording status callback</strong> URL to be invoked by Twilio after the call is recorded.</p>
+
+  <h3>References</h3>
+    <ul>
+        <li><a href="https://www.twilio.com/docs/voice/twiml/record">Twilio &lt;Record&gt; documentation</a></li>
+    </ul>
+
+</script>

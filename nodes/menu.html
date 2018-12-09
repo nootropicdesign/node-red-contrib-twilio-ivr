@@ -1,0 +1,204 @@
+
+<script type="text/x-red" data-template-name="menu">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <input type="checkbox" id="node-input-sayName" style="display: inline-block; width: auto; vertical-align: top;">
+        <label for="node-input-sayName" style="width: auto">Say menu name</label>
+    </div>
+    <div class="form-row">
+      <label for="node-input-voice"><i class="icon-tag"></i> Voice</label>
+      <select id="node-input-voice" placeholder="man">
+        <option selected="true" value="man">man</options>
+        <option value="woman">woman</option>
+      </select>
+    </div>
+    <div class="form-row" id="node-input-baseurl-row">
+      <label for="node-input-baseurl"><i class="icon-globe"></i> Audio Base URL</label>
+      <input type="text" id="node-input-baseurl">
+    </div>
+    <div class="form-row" style="margin-bottom:0;">
+        <label><i class="fa fa-list"></i> <span>Menu Items</span></label>
+    </div>
+    <div class="form-row node-input-rule-container-row">
+        <ol id="node-input-rule-container"></ol>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="menu">
+    <p>Speak an IVR menu to the caller.</p>
+
+    <p>A menu is a collection of menu items to be read to the caller. For each menu item, the name of the item can be spoken by specifying <strong>say</strong> or can be an audio file specified by the <strong>play</strong> option. The word "for" can be optionally prepended to the item choice. The caller can be instructed to <strong>press</strong> a key to choose the item, or <strong>press or say</strong> the keypad value. If <strong>speech</strong> is specified, the caller may also speak the word or phrase specified in order to choose this item. Finally, the <strong>route</strong> specifies which IVR route to follow if this item is chosen by the caller.</p>
+
+    <p>If a menu has any speech input, the preceeding Gather node must specify <strong>dtmf speech</strong> or <strong>speech</strong> as the input type. It is also helpful to add speech hints to the Gather node that correspond to the expected speech input specified in any menu items.</p>
+
+    <p><strong>Base URL</strong> is used to specify a web location where your audio files are deployed.</p>
+
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('menu', {
+        category: 'TwilioIVR-function',
+        color: '#3FADB5',
+        defaults: {
+            name: {value:""},
+            sayName: {value:true},
+            voice: {value:'man'},
+            baseurl: {
+                type:"audio-baseurl", validate:function(v) {
+                    return true;
+                }
+            },
+            items:{value:[{prependFor:false,key:"1",speech:"",action:"press",content:"",op:"say",route:""}]}
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'parser-csv.png',
+        align: 'left',
+        label: function() {
+            return this.name||'menu';
+        },
+        oneditprepare: function() {
+
+            function resizeRule(rule) {
+                var newWidth = rule.width();
+                rule.find('.red-ui-typedInput').typedInput("width",newWidth-150);
+
+            }
+            $('#node-input-rule-container').css('min-height','300px').css('min-width','450px').editableList({
+                addItem: function(container,i,opt) {
+
+                    var item = opt;
+                    if (!item.hasOwnProperty('key')) {
+                        item = {key:"1",speech:"",op:"say",content:"",action:"press",route:""};
+                    }
+
+                    var row1 = $('<div/>').appendTo(container);
+                    var row2 = $('<div/>',{style:"margin-top:8px;"}).appendTo(container);
+                    var row3 = $('<div/>',{style:"margin-top:8px;"}).appendTo(container);
+
+                    var prependFor = $('<input/>',{class:"node-input-item-prepend-for",type:"checkbox",value:"true",style:"display: inline-block; width: auto; margin-top: 0px"})
+                        .appendTo(row1);
+                    $('<label/>',{style:"width: auto; padding-left: 4px; padding-right: 4px"})
+                        .text('Prepend \'For\'')
+                        .appendTo(row1);
+
+
+                    var content = $('<input/>',{class:"node-input-item-content",type:"text"})
+                        .appendTo(row1)
+                        .typedInput({default:'say',types:[{value:'say',label:'Say:'}, {value:'play', label:'Play:'}]});
+
+
+                    var actionField = $('<select/>',{class:"node-input-item-action",style:"width:100px; margin-right:10px;"}).appendTo(row2);
+                    var actionOptions = [
+                        {v:"press",l:"press"},
+                        {v:"pressOrSay",l:"press or say"}
+                    ];
+
+                    for (var i=0; i<actionOptions.length; i++) {
+                        actionField.append($("<option></option>").val(actionOptions[i].v).text(actionOptions[i].l));
+                    }
+
+                    var keyField = $('<select/>',{class:"node-input-item-key",style:"width:50px; margin-right:10px;"}).appendTo(row2);
+                    var keyOptions = [
+                        {key:"1",l:1},
+                        {key:"2",l:2},
+                        {key:"3",l:3},
+                        {key:"4",l:4},
+                        {key:"5",l:5},
+                        {key:"6",l:6},
+                        {key:"7",l:7},
+                        {key:"8",l:8},
+                        {key:"9",l:9},
+                        {key:"0",l:0},
+                        {key:"star",l:'*'},
+                        {key:"pound",l:'#'},
+                        {key:"none",l:' '}
+                    ];
+                    for (var i=0; i<keyOptions.length; i++) {
+                        keyField.append($("<option></option>").val(keyOptions[i].key).text(keyOptions[i].l));
+                    }
+
+                    $('<div/>',{style:"display:inline-block;text-align:left;padding-right:4px; box-sizing:border-box;"})
+                        .text("Speech")
+                        .appendTo(row2);
+                    var speech = $('<input/>',{class:"node-input-item-speech",type:"text",placeholder:"",style:"width: auto"})
+                        .appendTo(row2);
+
+                    $('<div/>',{style:"display:inline-block;text-align:left;padding-right:4px; box-sizing:border-box;"})
+                        .text("Route")
+                        .appendTo(row3);
+                    var route = $('<input/>',{class:"node-input-item-route",type:"text",placeholder:"/route",style:"width: auto"})
+                        .appendTo(row3);
+
+                    if (item.prependFor) {
+                        prependFor.prop('checked', true);
+                    } else {
+                        prependFor.prop('checked', false);
+                    }
+                    keyField.val(item.key);
+                    actionField.val(item.action);
+                    content.typedInput('type',item.op);
+                    content.typedInput('value',item.content);
+                    speech.val(item.speech);
+                    route.val(item.route);
+
+                    var newWidth = $("#node-input-rule-container").width();
+                    resizeRule(container);
+                },
+                resizeItem: resizeRule,
+                removable: true,
+                sortable: true
+            });
+
+            if (!this.items) {
+                this.items = [];
+            }
+
+            if (this.sayName) {
+                $('#node-input-sayName').prop('checked', true);
+            } else {
+                $('#node-input-sayName').prop('checked', false);
+            }
+
+            for (var i=0; i<this.items.length; i++) {
+                var item = this.items[i];
+                $("#node-input-rule-container").editableList('addItem',item);
+            }
+        },
+        oneditsave: function() {
+            var items = $("#node-input-rule-container").editableList('items');
+            var itemset;
+            var node = this;
+            node.items= [];
+            items.each(function(i) {
+                var item = $(this);
+                var key = item.find(".node-input-item-key").val();
+                var it = {
+                    key:key,
+                    prependFor:item.find(".node-input-item-prepend-for").prop('checked'),
+                    content:item.find(".node-input-item-content").typedInput('value'),
+                    op:item.find(".node-input-item-content").typedInput('type'),
+                    action:item.find(".node-input-item-action").val(),
+                    speech:item.find(".node-input-item-speech").val(),
+                    route:item.find(".node-input-item-route").val(),
+                };
+                console.log(JSON.stringify(it));
+                node.items.push(it);
+            });
+        },
+        oneditresize: function(size) {
+            var rows = $("#dialog-form>div:not(.node-input-rule-container-row)");
+            var height = size.height;
+            for (var i=0; i<rows.size(); i++) {
+                height -= $(rows[i]).outerHeight(true);
+            }
+            var editorRow = $("#dialog-form>div.node-input-rule-container-row");
+            height -= (parseInt(editorRow.css("marginTop"))+parseInt(editorRow.css("marginBottom")));
+
+            $("#node-input-rule-container").editableList('height',height);
+        }
+    });
+</script>

@@ -1,0 +1,37 @@
+{
+  "name": "node-red-contrib-twilio-ivr",
+  "version": "0.0.1",
+  "description": "Node-RED nodes for Twilio IVR development",
+  "main": "twilio-ivr.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nootropicdesign/node-red-contrib-twilio-ivr.git"
+  },
+  "homepage": "https://github.com/nootropicdesign/node-red-contrib-twilio-ivr#readme",
+  "author": {
+    "name": "Michael Krumpus",
+    "email": "michael@nootropicdesign.com",
+    "url": "https://nootropicdesign.com"
+  },
+  "keywords": [
+    "node-red-contrib", "twilio", "ivr"
+  ],
+  "node-red" : {
+    "nodes": {
+      "twiml-begin": "nodes/twiml-begin.js",
+      "twiml-end": "nodes/twiml-end.js",
+      "gather-begin": "nodes/gather-begin.js",
+      "gather-end": "nodes/gather-end.js",
+      "menu": "nodes/menu.js",
+      "say": "nodes/say.js",
+      "play": "nodes/play.js",
+      "record": "nodes/record.js",
+      "set-route": "nodes/set-route.js",
+      "pause": "nodes/pause.js",
+      "redirect": "nodes/redirect.js",
+      "hangup": "nodes/hangup.js",
+      "random-switch": "nodes/random-switch.js"
+    }
+  }
+}

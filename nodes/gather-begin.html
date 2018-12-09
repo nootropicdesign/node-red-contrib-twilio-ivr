@@ -1,0 +1,77 @@
+<script type="text/javascript">
+  RED.nodes.registerType('gather-begin',{
+    category: 'TwilioIVR-function',
+    color: '#a6bbcf',
+    defaults: {
+      name: {value:""},
+      action: {value:"/router"},
+      input: {value:"dtmf"},
+      timeout: {value:"5"},
+      numDigits: {value:'1'},
+      speechHints: {value:""},
+      speechTimeout: {value:"auto"}
+    },
+    inputs:1,
+    outputs:1,
+    icon: 'parser-html.png',
+    paletteLabel: 'gather-begin',
+    label: function() {
+      return this.name||"gather-begin";
+    },
+    oneditprepare: function() {
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="gather-begin">
+  <div class="form-row">
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+      <div id="node-row-gather">
+          <div class="form-row">
+              <label for="node-input-action"><i class="icon-tag"></i> Action</label>
+              <input type="text" id="node-input-action" placeholder="Action">
+          </div>
+          <div class="form-row">
+              <label for="node-input-input"><i class="icon-tag"></i> Input</label>
+              <select id="node-input-input" placeholder="dtmf">
+                  <option selected="true" value="dtmf">dtmf</option>
+                  <option value="speech">speech</options>
+                  <option value="dtmf speech">dtmf speech</options>
+              </select>
+          </div>
+          <div class="form-row">
+              <label for="node-input-timeout"><i class="icon-tag"></i> Timeout</label>
+              <input type="text" id="node-input-timeout" placeholder="5">
+          </div>
+          <div class="form-row">
+              <label for="node-input-numDigits"><i class="icon-tag"></i> Digits</label>
+              <input type="text" id="node-input-numDigits" placeholder="1">
+          </div>
+          <div class="form-row">
+              <label for="node-input-speechHints"><i class="icon-tag"></i> Speech hints</label>
+              <input type="text" id="node-input-speechHints" placeholder="">
+          </div>
+          <div class="form-row">
+              <label for="node-input-speechTimeout"><i class="icon-tag"></i> Speech timeout</label>
+              <input type="text" id="node-input-speechTimeout" placeholder="">
+          </div>
+      </div>
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="gather-begin">
+  <p>Begin a TwiML Gather operation which gets input from the caller.</p>
+
+  <p>The default <strong>action</strong> is to invoke the universal router at /router.</p>
+  <p>Use <strong>input</strong> to specify whether the callers input is DTML tones (key presses), speech, or both DTMF and speech.</p>
+  <p><strong>digits</strong> specifies the maximum number of digits to expect.</p>
+  <p><strong>timeout</strong> and <strong>speech timeout</strong> specify the maximum wait for input.</p>
+
+  <h3>References</h3>
+    <ul>
+        <li><a href="https://www.twilio.com/docs/voice/twiml/gather">Twilio &lt;Gather&gt; documentation</a></li>
+    </ul>
+</script>

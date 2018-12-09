@@ -1,0 +1,49 @@
+<script type="text/javascript">
+  RED.nodes.registerType('redirect',{
+    category: 'TwilioIVR-function',
+    color: '#D7D7A0',
+    defaults: {
+      name: {value:""},
+      method: {value:"POST"},
+      url: {value:""}
+    },
+    inputs:1,
+    outputs:1,
+    icon: 'arrow-in.png',
+    align: 'right',
+    paletteLabel: "redirect",
+    label: function() {
+      return this.name||"redirect";
+    }
+  });  
+</script>
+
+<script type="text/x-red" data-template-name="redirect">
+  <div class="form-row">
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+    <label for="node-input-method"><i class="icon-tag"></i> Method</label>
+    <select id="node-input-method" placeholder="POST">
+      <option selected="true" value="POST">POST</option>
+      <option value="GET">GET</options>
+    </select>
+  </div>
+  <div class="form-row">
+    <label for="node-input-url"><i class="icon-tag"></i> URL</label>
+    <input type="text" id="node-input-url" placeholder="/someurl">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="redirect">
+  <p>Redirect Twilio to a different URL.</p>
+
+  <p>If URL is not specified, <code>msg.topic</code> will be used.</p>
+
+  <h3>References</h3>
+    <ul>
+        <li><a href="https://www.twilio.com/docs/voice/twiml/redirect">Twilio &lt;Redirect&gt; documentation</a></li>
+    </ul>
+
+</script>

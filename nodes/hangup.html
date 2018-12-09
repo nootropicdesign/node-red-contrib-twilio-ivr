@@ -1,0 +1,34 @@
+<script type="text/javascript">
+  RED.nodes.registerType('hangup',{
+    category: 'TwilioIVR-function',
+    color: '#a6bbcf',
+    defaults: {
+      name: {value:""}
+    },
+    inputs:1,
+    outputs:1,
+    icon: 'parser-html.png',
+    align: 'right',
+    paletteLabel: "hang up",
+    label: function() {
+      return this.name||"hang up";
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="hangup">
+  <div class="form-row">
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="hangup">
+  <p>Hang up and end the Twilio call.</p>
+
+  <h3>References</h3>
+    <ul>
+        <li><a href="https://www.twilio.com/docs/voice/twiml/hangup">Twilio &lt;Hangup&gt; documentation</a></li>
+    </ul>
+
+</script>

@@ -1,0 +1,49 @@
+<script type="text/javascript">
+  RED.nodes.registerType('say',{
+    category: 'TwilioIVR-function',
+    color: '#F3B567',
+    defaults: {
+      name: {value:""},
+      phrase: {value:""},
+      voice: {value:'man'}
+    },
+    inputs:1,
+    outputs:1,
+    icon: 'comment.png',
+    align: 'right',
+    paletteLabel: "say",
+    label: function() {
+      return this.name||"say";
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="say">
+  <div class="form-row">
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+    <label for="node-input-phrase"><i class="icon-tag"></i> Phrase</label>
+    <input type="text" id="node-input-phrase" placeholder="Phrase">
+  </div>
+  <div class="form-row">
+    <label for="node-input-voice"><i class="icon-tag"></i> Voice</label>
+    <select id="node-input-voice" placeholder="man">
+      <option selected="true" value="man">man</options>
+      <option value="woman">woman</option>
+    </select>
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="say">
+  <p>Say a phrase.</p>
+
+  <p>If <strong>phrase</strong> is not specified, the value of the input property <code>msg.payload.say</code> will be used.</p>
+
+  <h3>References</h3>
+    <ul>
+        <li><a href="https://www.twilio.com/docs/voice/twiml/say">Twilio &lt;Say&gt; documentation</a></li>
+    </ul>
+
+</script>

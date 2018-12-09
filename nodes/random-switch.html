@@ -1,0 +1,33 @@
+<script type="text/javascript">
+  RED.nodes.registerType('random-switch',{
+    category: 'TwilioIVR-function',
+    color: '#E2D96E',
+    defaults: {
+      name: {value:""},
+      outputs: {value:1}
+    },
+    inputs:1,
+    outputs:1,
+    icon: 'timer.png',
+    align: 'left',
+    paletteLabel: "random switch",
+    label: function() {
+      return this.name||"random switch";
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="random-switch">
+  <div class="form-row">
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+    <label for="node-input-outputs"><i class="icon-tag"></i> Outputs</label>
+    <input type="text" id="node-input-outputs" placeholder="1">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="random-switch">
+  <p>Send the incoming message on a randomly chosen output.</p>
+</script>
