@@ -3,12 +3,14 @@ This library of Node-RED nodes enables you to build a powerful and flexible Inte
 
 
 A Twilio Node-RED IVR is essentially a web server that returns [TwiML markup](https://www.twilio.com/docs/voice/twiml) to Twilio. This is the basic architecture of the system:
+
 ![Twilio architecture](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/twilio_architecture.png)
 
 
 
 
 In your Twilio account, you will need to configure your phone number to invoke the HTTP endpoints defined in the IVR Core flow.
+
 ![Twilio phone setup](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/twilio_phone_number_setup.png)
 
 
@@ -31,6 +33,7 @@ Create a Node-RED flow called `Twilio IVR Core` with the following contents:
 
 
 In the HTTP request node called "invoke route", update the configuration to fit your server's security configuration. That is, whether TLS/SSL is used, and the your Node-RED HTTP node username/password credentials. In your TLS/SSL configuration, you may need to uncheck the checkbox "verify server certificate".
+
 ![Twilio phone setup](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/invoke-route-node.png)
 
 
