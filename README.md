@@ -7,11 +7,29 @@ A Twilio Node-RED IVR is essentially a web server that returns [TwiML markup](ht
 ![Twilio architecture](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/twilio_architecture.png)
 
 
-
-
-In your Twilio account, you will need to configure your phone number to invoke the HTTP endpoints defined in the IVR Core flow.
+The nodes in this library create the TwiML markup for Twilio to present to the caller. You will also need to create a Node-RED flow for the Twilio IVR Core which handles incoming requests and properly routes the call based on the caller's input. The Universal Router is the HTTP endpoint `/router`. In your Twilio account, you will need to configure your phone number to invoke the HTTP endpoints defined in the IVR Core flow.
 
 ![Twilio phone setup](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/twilio_phone_number_setup.png)
+
+
+### TwiML Nodes
+These nodes can be assembled together to create TwiML response documents. Many correspond directly to TwiML tags, but the 'menu' node is more complex and creates the TwiML content for a whole menu.
+
+node | description
+---- | -----------
+![twiml-begin](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/twiml-begin.png) | begin the TwiML response -- handled by IVR Core flow
+![twiml-end](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/twiml-end.png) | end the TwiML response -- handled by IVR Core flow
+![gather-begin](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/gather-begin.png) | begin a TwiML Gather operation which gets input from the caller
+![gather-end](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/gather-end.png) | end TwiML Gather operation
+![say](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/say.png) | say a phrase
+![play](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/play.png) | play an audio file
+![record](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/record.png) | record the caller
+![menu](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/menu.png) | speak an IVR menu to the caller
+![set-route](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/set-route.png) | set the next route to invoke after this route executes
+![pause](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/pause.png) | pause for a specified number of seconds
+![redirect](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/redirect.png) | redirect Twilio to a URL -- only used by IVR Core flow
+![hangup](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/hangup.png) | hang up and end the Twilio call
+
 
 
 ## Installation and Setup
