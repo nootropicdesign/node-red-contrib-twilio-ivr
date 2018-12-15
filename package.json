@@ -27,6 +27,7 @@
       "say": "nodes/say.js",
       "play": "nodes/play.js",
       "record": "nodes/record.js",
+      "dial": "nodes/dial.js",
       "set-route": "nodes/set-route.js",
       "pause": "nodes/pause.js",
       "redirect": "nodes/redirect.js",

@@ -27,11 +27,13 @@ node | description
 ![say](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/say.png) | say a phrase
 ![play](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/play.png) | play an audio file
 ![record](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/record.png) | record the caller
+![dial](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/dial.png) | dial out to another phone number
 ![menu](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/menu.png) | speak an IVR menu to the caller
 ![set-route](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/set-route.png) | set the next route to invoke after this route executes
 ![pause](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/pause.png) | pause for a specified number of seconds
 ![redirect](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/redirect.png) | redirect Twilio to a URL -- only used by IVR Core flow
 ![hangup](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/hangup.png) | hang up and end the Twilio call
+![random-switch](https://raw.githubusercontent.com/nootropicdesign/node-red-contrib-twilio-ivr/master/doc/images/random-switch.png) | choose an output path randomly
 
 
 
