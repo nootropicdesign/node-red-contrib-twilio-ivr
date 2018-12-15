@@ -1,7 +1,6 @@
 # node-red-contrib-twilio-ivr
 
-![npm-badge](https://img.shields.io/npm/v/node-red-contrib-twilio-ivr.svg)
-
+[![npm](https://img.shields.io/npm/v/node-red-contrib-twilio-ivr.svg?logo=npm)](https://www.npmjs.com/package/node-red-contrib-twilio-ivr)
 
 This library of Node-RED nodes enables you to build a powerful and flexible Interactive Voice Response (IVR) telephone system with Twilio and Node-RED. This README assumes you have experience with Twilio and Node-RED, but there is a much more [comprehensive article here](https://nootropicdesign.com/projectlab/2018/12/15/twilio-ivr/) which gives a detailed description of how it all works.
 
