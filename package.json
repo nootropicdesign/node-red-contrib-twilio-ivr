@@ -15,7 +15,7 @@
     "url": "https://nootropicdesign.com"
   },
   "keywords": [
-    "node-red-contrib", "twilio", "ivr"
+    "node-red", "node-red-contrib", "twilio", "ivr"
   ],
   "node-red" : {
     "nodes": {
